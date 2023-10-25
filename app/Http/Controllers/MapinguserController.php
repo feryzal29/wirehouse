@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\mapinguser;
+use App\Models\plan;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MapinguserController extends Controller
 {
@@ -12,12 +15,18 @@ class MapinguserController extends Controller
      */
     public function index()
     {
-        $maping = mapinguser::all();
+        $maping = DB::table('mapingusers')
+                    ->join('users', 'users.id', '=', 'mapingusers.user_id')
+                    ->join('plans', 'plans.id', '=', 'mapingusers.plan_id')
+                    ->select('users.name as namee', 'plans.name as planename', 'mapingusers.*')
+                    ->get();
         return view('MapingPlanUser',compact(['maping']));
     }
 
     public function add(){
-        return view('MapingUserPlanAdd');
+        $user = User::all();
+        $plan = plan::all();
+        return view('MapingUserPlanAdd',compact(['user','plan']));
     }
 
     /**
@@ -33,7 +42,17 @@ class MapinguserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'user_id'=>'required',
+            'plan_id'=>'required'
+        ]);
+
+        $maping = mapinguser::create([
+            'user_id'=> $request->user_id,
+            'plan_id'=> $request->plan_id
+        ]);
+
+        return redirect()->back()->with(['success'=>'Data Berhasil ditambah']);
     }
 
     /**

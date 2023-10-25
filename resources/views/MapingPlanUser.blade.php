@@ -37,15 +37,17 @@
             </tr>
             </thead>
             <tbody>
+              @foreach ($maping as $item)
               <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->namee }}</td>
+                <td>{{ $item->planename }}</td>
                 <td>
-                  {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('master.plan.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
-                  <a href="{{ route('master.user.show',$item->id) }}" class="btn btn-success">Edit</a> --}}
+                  <a onclick="return confirm('Are you sure?')" href="{{ route('master.plan.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                  <a href="{{ route('master.user.show',$item->id) }}" class="btn btn-success">Edit</a>
               </td>
               </tr>
+              @endforeach
            <tfoot>
             <tr>
               <th>ID</th>

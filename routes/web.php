@@ -51,4 +51,5 @@ Route::controller(UserController::class)->group(function (){
 Route::controller(MapinguserController::class)->group(function (){
     Route::get('master/maping','index')->name('master.maping.index');
     Route::get('master/mapingadd','add')->name('master.maping.add');
+    Route::post('master/maping','store')->name('master.maping.store');
 });

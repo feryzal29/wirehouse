@@ -24,39 +24,30 @@
           <h3 class="card-title" style="float: left;">Maping User Plan</h3>
         </div>
         <!-- /.card-header -->
-        <form action="" method="post">
+        <form action="{{ route('master.maping.store') }}" method="post">
           @csrf
-          @method('PUT')
         <div class="card-body">
           <div class="form-group">
-            <label>Minimal</label>
-            <select class="form-control select2bs4" style="width: 100%;">
-              <option selected="selected">Alabama</option>
-              <option>Alaska</option>
-              <option>California</option>
-              <option>Delaware</option>
-              <option>Tennessee</option>
-              <option>Texas</option>
-              <option>Washington</option>
+            <label>User</label>
+            <select class="form-control select2bs4" style="width: 100%;" name="user_id">
+              @foreach ($user as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+              @endforeach
             </select>
           </div> 
   
           <div class="form-group">
-            <label>Minimal</label>
-            <select class="form-control select2bs4" style="width: 100%;">
-              <option selected="selected">Alabama</option>
-              <option>Alaska</option>
-              <option>California</option>
-              <option>Delaware</option>
-              <option>Tennessee</option>
-              <option>Texas</option>
-              <option>Washington</option>
+            <label>Plan</label>
+            <select class="form-control select2bs4" style="width: 100%;" name="plan_id">
+              @foreach ($plan as $item)
+              <option value="{{ $item->id }}">{{ $item->name }}</option>
+              @endforeach
             </select>
           </div> 
           
         </div>
         <div class="card-footer">
-          <input class="btn btn-success" type="submit" style="float: right;" value="Ganti">
+          <input class="btn btn-primary" type="submit" style="float: right;" value="Simpan">
         </div>
         </form>
         <!-- /.card-body -->
