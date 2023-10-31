@@ -3,6 +3,7 @@
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapinguserController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -35,21 +36,29 @@ Route::controller(IndexController::class)->group(function (){
 });
 
 Route::controller(PlanController::class)->group(function (){
-    Route::get('master/plan','index')->name('master.plan.index');
-    Route::post('master/plan','store')->name('master.plan.store');
-    Route::get('master/plan/{id}/delete','destroy')->name('master.plan.delete');
+    Route::get('master/plan','index')->name('master.plan.index')->middleware('role:user|administrator');
+    Route::post('master/plan','store')->name('master.plan.store')->middleware('role:user|administrator');
+    Route::get('master/plan/{id}/delete','destroy')->name('master.plan.delete')->middleware('role:user|administrator');
 });
 
 Route::controller(UserController::class)->group(function (){
-    Route::get('master/user','index')->name('master.user.index');
-    Route::get('master/{id}/user','show')->name('master.user.show');
-    Route::post('master/user','store')->name('master.user.store');
-    Route::put('master/{user}/user','update')->name('master.user.update');
-    Route::delete('master/{user}/user', 'destroy')->name('master.user.destroy');
+    Route::get('master/user','index')->name('master.user.index')->middleware('role:user|administrator');
+    Route::get('master/{id}/user','show')->name('master.user.show')->middleware('role:user|administrator');
+    Route::post('master/user','store')->name('master.user.store')->middleware('role:user|administrator');
+    Route::put('master/{user}/user','update')->name('master.user.update')->middleware('role:user|administrator');
+    Route::delete('master/{user}/user', 'destroy')->name('master.user.destroy')->middleware('role:user|administrator');
 });
 
 Route::controller(MapinguserController::class)->group(function (){
-    Route::get('master/maping','index')->name('master.maping.index');
-    Route::get('master/mapingadd','add')->name('master.maping.add');
-    Route::post('master/maping','store')->name('master.maping.store');
+    Route::get('master/maping','index')->name('master.maping.index')->middleware('role:user|administrator');
+    Route::get('master/mapingadd','add')->name('master.maping.add')->middleware('role:user|administrator');
+    Route::post('master/maping','store')->name('master.maping.store')->middleware('role:user|administrator');
+});
+
+Route::controller(MaterialController::class)->group(function (){
+    Route::get('master/material','index')->name('master.material.index')->middleware('role:user|administrator');
+    Route::post('master/material','store')->name('master.material.store')->middleware('role:user|administrator');
+    Route::get('master/material/{id}/delete','destroy')->name('master.material.delete')->middleware('role:user|administrator');
+    Route::get('master/material/{material}/show','show')->name('master.material.show')->middleware('role:user|administrator');
+    Route::put('master/{material}/material','update')->name('master.user.update')->middleware('role:user|administrator');
 });

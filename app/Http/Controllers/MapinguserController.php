@@ -52,7 +52,7 @@ class MapinguserController extends Controller
             'plan_id'=> $request->plan_id
         ]);
 
-        return redirect()->back()->with(['success'=>'Data Berhasil ditambah']);
+        return redirect()->route('master.maping.index');
     }
 
     /**
