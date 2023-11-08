@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MapinguserController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
@@ -60,5 +61,16 @@ Route::controller(MaterialController::class)->group(function (){
     Route::post('master/material','store')->name('master.material.store')->middleware('role:user|administrator');
     Route::get('master/material/{id}/delete','destroy')->name('master.material.delete')->middleware('role:user|administrator');
     Route::get('master/material/{material}/show','show')->name('master.material.show')->middleware('role:user|administrator');
-    Route::put('master/{material}/material','update')->name('master.user.update')->middleware('role:user|administrator');
+    Route::put('master/{material}/material','update')->name('master.material.update')->middleware('role:user|administrator');
+});
+
+Route::controller(TransferController::class)->group(function (){
+    Route::get('transfer','index')->name('transfer.index')->middleware('role:user|administrator');
+    Route::get('transfer/masuk','TransferMasukGet')->name('transfer.masuk')->middleware('role:user|administrator');
+    Route::get('transfer/masuk-terima','TransferMasukGetDiterima')->name('transfer.terima')->middleware('role:user|administrator');
+    Route::post('transfer/add','store')->name('transfer.store')->middleware('role:user|administrator');
+    Route::get('transfer/post','TransferKeluarPost')->name('transfer.form')->middleware('role:user|administrator');
+    Route::get('transfer/{id}/delete','destroy')->name('transfer.delete')->middleware('role:user|administrator');
+    Route::put('transfer/{transfer}/update','update')->name('transfer.update')->middleware('role:user|administrator');
+    
 });

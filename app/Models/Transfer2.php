@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Transfer2 extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
         'transfer_id',
         'pengirim_id',
         'material_id',
@@ -22,4 +22,9 @@ class Transfer2 extends Model
         'status_pengiriman',
         'diterima_oleh'
     ];
+
+    public function UserClass(): HasOneThrough
+    {
+        return $this->hasOneThrough(Transfer::class, User::class);
+    }
 }

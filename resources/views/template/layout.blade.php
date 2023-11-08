@@ -40,10 +40,15 @@
 
 
   <!-- Navbar -->
+  
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
-
-
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      
+    </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
@@ -95,14 +100,27 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="{{ route('transfer.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
+                  <p>Transfer Keluar</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('transfer.masuk') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Masuk Belum diterima</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('transfer.terima') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Masuk Sudah diterima</p>
                 </a>
               </li>
 
             </ul>
           </li>
+          
           <li class="nav-item">
             <a href="#" class="nav-link">
               <p>
@@ -111,6 +129,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @role('administrator')
               <li class="nav-item">
                 <a href="{{ route('master.plan.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -129,6 +148,7 @@
                   <p>User Plan</p>
                 </a>
               </li>
+              @endrole
               <li class="nav-item">
                 <a href="{{ route('master.material.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
