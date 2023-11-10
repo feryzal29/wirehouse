@@ -41,7 +41,8 @@ class TransferController extends Controller
                     'transfer2s.pengganti',
                     'transfer2s.status',
                     'transfer2s.status_pengiriman',
-                    'transfer2s.diterima_oleh'
+                    'transfer2s.diterima_oleh',
+                    'transfer2s.estimate_time_arrival'
                 ])
                 ->where('transfer2s.pengirim_id', '=', $maping->plan_id)
                 ->get();
@@ -146,9 +147,8 @@ class TransferController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+       $request->validate([
             'user_id'=>'required',
-            'transfer_id' => 'required',
             'pengirim_id' => 'required',
             'material_id' => 'required',
             'penerima_id' => 'required',
@@ -157,25 +157,49 @@ class TransferController extends Controller
             'pengganti' => 'required',
             'status' => 'required',
         ]);
+
         
         try {
             DB::beginTransaction();
-            
-            $trasnfer = Transfer::create([
-                'user_id' => $request->user_id
-            ]);
+            $tgl = $request->tanggal;
+            $tgl_str = date('Y-m-d',strtotime($tgl));
+            if($tgl_str == null){
+                $trasnfer = Transfer::create([
+                    'user_id' => $request->user_id
+                ]);
+    
+                $transfer2 = Transfer2::create([
+                    'transfer_id' => $trasnfer->id,
+                    'pengirim_id' => $request->pengirim_id,
+                    'material_id' => $request->material_id,
+                    'penerima_id' => $request->penerima_id,
+                    'material_dokumen' => $request->material_dokumen,
+                    'item' => $request->item,
+                    'pengganti' => $request->pengganti,
+                    'status' => $request->status,
+                    'status_pengiriman' => "belum"
+                ]);
+            } else {
+                $trasnfer = Transfer::create([
+                    'user_id' => $request->user_id
+                ]);
+                $tgl = $request->tanggal;
+                $tgl_str = date('Y-m-d',strtotime($tgl));
+                $transfer2 = Transfer2::create([
+                    'transfer_id' => $trasnfer->id,
+                    'pengirim_id' => $request->pengirim_id,
+                    'material_id' => $request->material_id,
+                    'penerima_id' => $request->penerima_id,
+                    'material_dokumen' => $request->material_dokumen,
+                    'item' => $request->item,
+                    'pengganti' => $request->pengganti,
+                    'status' => $request->status,
+                    'status_pengiriman' => "belum",
+                    'estimate_time_arrival' => $tgl_str
+                ]);
+            }
 
-            $transfer2 = Transfer2::create([
-                'transfer_id' => $trasnfer->id,
-                'pengirim_id' => $request->pengirim_id,
-                'material_id' => $request->material_id,
-                'penerima_id' => $request->penerima_id,
-                'material_dokumen' => $request->material_dokumen,
-                'item' => $request->item,
-                'pengganti' => $request->pengganti,
-                'status' => $request->status,
-                'status_pengiriman' => "belum"
-            ]);
+            
             
             DB::commit();
             return redirect()->route('transfer.index')->with('success', 'Data berhasil diperbarui.');

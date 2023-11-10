@@ -20,7 +20,8 @@ class Transfer2 extends Model
         'pengganti',
         'status',
         'status_pengiriman',
-        'diterima_oleh'
+        'diterima_oleh',
+        'estimate_time_arrival'
     ];
 
     public function UserClass(): HasOneThrough

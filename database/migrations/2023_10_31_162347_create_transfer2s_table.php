@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('status',['open','close']);
             $table->enum('status_pengiriman',['belum','diterima']);
             $table->string('diterima_oleh')->nullable();
+            $table->date('estimate_time_arrival')->nullable();
             $table->timestamps();
         });
     }
