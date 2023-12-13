@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
-class Transfer2 extends Model
+class transfer3 extends Model
 {
     use HasFactory;
 
@@ -21,8 +21,7 @@ class Transfer2 extends Model
         'status',
         'status_pengiriman',
         'diterima_oleh',
-        'estimate_time_arrival',
-        'material_update'
+        'estimate_time_arrival'
     ];
 
     public function UserClass(): HasOneThrough

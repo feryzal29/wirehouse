@@ -24,6 +24,8 @@ return new class extends Migration
             $table->enum('status_pengiriman',['belum','diterima']);
             $table->string('diterima_oleh')->nullable();
             $table->date('estimate_time_arrival')->nullable();
+            //$table->foreignId('material_update')->constrained('materials','id')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->integer('material_update_id')->nullable();
             $table->timestamps();
         });
     }

@@ -47,7 +47,7 @@
             <tbody>
               @foreach ($transfer as $item)
                 <tr>
-                  <td>{{ $item->plan_penerima_name }}</td>
+                  <td>{{ $item->plan_pengirim_name }}</td>
                   <td>{{ $item->materials }}</td>
                   <td>{{ $item->material_description }}</td>
                   <td>{{ $item->mnemonic }}</td>
@@ -66,15 +66,18 @@
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
                   <td>
+                    
+                    {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a> --}}
+                    <a href="{{ route('transfer.penerimaan',$item->id) }}" class="btn btn-success">Terima</a>
                     {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
-                    <form action="{{ route('transfer.update', $item->id) }}" method="post">
+                    {{-- <form action="{{ route('transfer.update', $item->id) }}" method="post">
                       @csrf
                       @method('PUT')
                       <input type="hidden" name="status" value="diterima">
                       <input type="hidden" name="diterima_oleh" value="{{ Auth::user()->name }}">
 
                      <input class="btn btn-success" type="submit" value="Terima">
-                    </form>
+                    </form> --}}
                     {{-- <div class="btn-group">
                       <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action

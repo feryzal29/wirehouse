@@ -41,6 +41,7 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
+              <th>Material Pengganti</th>
               <th>Estimate Time Arrival</th>
               <th>Action</th>
             </tr>
@@ -66,6 +67,7 @@
                     @endif
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
+                  <td>{{ $item->material_update }}</td>
                   <td>
                     @if ($item->estimate_time_arrival == null)
                       
@@ -73,19 +75,22 @@
                     {{ date('d-M-y',strtotime($item->estimate_time_arrival)) }}</td>
                     @endif
                   <td>
-                    
-                    @if ($item->status == 'open')
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Edit</a>
-                        <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="" data-method="delete">Delete</a>
+                    @if ($item->id_user == Auth::user()->id)
+                      @if ($item->status == 'open')
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
+                          <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                        </div>
                       </div>
-                    </div>
+                      @else
+                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                      @endif
                     @else
-                      <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                      
                     @endif
                 </td>
                 </tr>   
@@ -105,6 +110,7 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
+              <th>Material Pengganti</th>
               <th>Estimate Time Arrival</th>
               <th>Action</th>
             </tr>

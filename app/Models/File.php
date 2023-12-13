@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class File extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'transfer2_id',
+        'path',
+        'path2',
+    ];
+    
 }

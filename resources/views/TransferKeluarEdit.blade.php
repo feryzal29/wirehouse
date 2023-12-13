@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Transfer Keluar</h1>
+          <h1 class="m-0">Transfer Keluar Ganti</h1>
         </div><!-- /.col -->
 
       </div><!-- /.row -->
@@ -21,27 +21,33 @@
 
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title" style="float: left;">Transfer Keluar</h3>
+          <h3 class="card-title" style="float: left;">Transfer Keluar Ganti</h3>
         </div>
         <!-- /.card-header -->
-        <form action="{{ route('transfer.store') }}" method="post">
+        <form action="{{ route('transfer.pengganti', $transfer->id) }}" method="post">
           @csrf
+          @method('PUT')
           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
         <div class="card-body">
           <div class="form-group">
             <label for="exampleInputEmail1">Plan Pengirim :</label>
             <input type="text" class="form-control" value="{{ $maping[0]->planename }}" readonly>
-            <input type="hidden" name="pengirim_id" value="{{ $maping[0]->plan_id }}">
+            <input type="hidden" name="pengirim_id" value="{{ $maping[0]->id }}">
           </div>
 
           <div class="form-group">
+            <label for="exampleInputEmail1">Plan Penerima :</label>
+            <input type="text" class="form-control" value="{{ $transfer->plan_penerima_name }}" readonly>
+          </div>
+
+          {{-- <div class="form-group">
             <label for="exampleInputEmail1">Plan Penerima :</label>
             <select class="form-control select2bs4" style="width: 100%;" name="penerima_id">
               @foreach ($plan as $item)
               <option value="{{ $item->id }}">{{ $item->name }}</option>
               @endforeach
             </select>
-          </div>
+          </div> --}}
 
           <div class="form-group">
             <label for="exampleInputEmail1">Material :</label>
@@ -54,7 +60,7 @@
   
           <div class="form-group">
             <label for="exampleInputEmail1">Material Document :</label>
-            <input type="text" class="form-control" name="material_dokumen" value="">
+            <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
           </div>
           
           <div class="form-group">
@@ -67,35 +73,7 @@
             <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
           </div>
 
-          <label for="exampleInputEmail1">Pengganti :</label><br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="pengganti" id="inlineRadio1" value="yes">
-            <label class="form-check-label" for="inlineRadio1">YES</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="pengganti" id="inlineRadio1" value="no">
-            <label class="form-check-label" for="inlineRadio1">NO</label>
-          </div><br>
-
-          <label for="exampleInputEmail1">Status :</label><br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="open">
-            <label class="form-check-label" for="inlineRadio1">OPEN</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="close">
-            <label class="form-check-label" for="inlineRadio1">CLOSE</label>
-          </div><br>
-          <label>Estimate Time Arrival :</label>
-          <div class="form-group">
-              <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" name="tanggal" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-              </div>
-          </div>
-
+          
           
         </div>
         <div class="card-footer">
