@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Transfer Keluar Ganti</h1>
+          <h1 class="m-0">Bukti Diterima</h1>
         </div><!-- /.col -->
 
       </div><!-- /.row -->
@@ -24,63 +24,33 @@
           @if($errors->any())
           {{ implode('', $errors->all('<div>:message</div>')) }}
         @endif
-          <h3 class="card-title" style="float: left;">Transfer Keluar Ganti</h3>
+          <h3 class="card-title" style="float: left;">Bukti Diterima</h3>
         </div>
-        <!-- /.card-header -->
-        <form action="{{ route('transfer.pengganti2', $transfer->id) }}" method="post">
-          @csrf
-          <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-          <input type="hidden" name="parent_id" value="{{ $transfer->id }}">
         <div class="card-body">
+        <!-- /.card-header -->
           <div class="form-group">
-            <label for="exampleInputEmail1">Plan Pengirim :</label>
-            <input type="text" class="form-control" value="{{ $transfer->plan_pengirim_name }}" readonly>
-            <input type="hidden" name="pengirim_id" value="{{ $transfer->plan_pengirim_id }}">
+            <label for="exampleInputEmail1">Material Code :</label>
+            <input type="text" class="form-control" value="{{ $penerimaan->material_code }}" readonly>
           </div>
-
           <div class="form-group">
-            <label for="exampleInputEmail1">Plan Penerima :</label>
-            <input type="hidden" name="penerima_id" value="{{ $transfer->plan_penerima_name_id }}">
-            <input type="text" class="form-control" value="{{ $transfer->plan_penerima_name }}" readonly>
+            <label for="exampleInputEmail1">Material Description :</label>
+            <input type="text" class="form-control" value="{{ $penerimaan->material_description }}" readonly>
           </div>
-
-          <div class="form-group">
-            <label for="exampleInputEmail1">Material Sebelumnya :</label>
-            {{-- <input type="hidden" class="form-control" value="{{ $transfer->material_id }}" readonly> --}}
-            <input type="text" class="form-control" value="{{ $transfer->materials }} - {{ $transfer->material_description }}" readonly>
-          </div>
-
-          <div class="form-group">
-            <label for="exampleInputEmail1">Material Pengganti :</label>
-            <select class="form-control select2bs4" style="width: 100%;" name="material_id">
-              @foreach ($material as $item)
-              <option value="{{ $item->id }}">{{ $item->material_code }} - {{ $item->material_description }}</option>
-              @endforeach
-            </select>
-          </div>
-  
-          <div class="form-group">
-            <label for="exampleInputEmail1">Material Document :</label>
-            <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
-          </div>
-          
           <div class="form-group">
             <label for="exampleInputEmail1">Item :</label>
-            <input type="number" class="form-control" name="item" value="">
+            <input type="text" class="form-control" value="{{ $penerimaan->item }}" readonly>
           </div>
-  
           <div class="form-group">
-            <label for="exampleInputEmail1">PIC :</label>
-            <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
+            <label for="exampleInputEmail1">Bukti Penerimaan :</label><br>
+            <img src="{{ asset($penerimaan->path) }}" width="500"  alt="" srcset="">
           </div>
-
-          
+          <div class="form-group">
+            <label for="exampleInputEmail1">Date Time :</label>
+            <input type="text" class="form-control" value="{{ $penerimaan->created_at }}" readonly>
+          </div>
           
         </div>
-        <div class="card-footer">
-          <input class="btn btn-primary" type="submit" style="float: right;" value="Kirim">
-        </div>
-        </form>
+        
         <!-- /.card-body -->
       </div>
 

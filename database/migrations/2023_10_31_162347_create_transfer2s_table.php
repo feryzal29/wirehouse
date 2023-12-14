@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('estimate_time_arrival')->nullable();
             //$table->foreignId('material_update')->constrained('materials','id')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->integer('material_update_id')->nullable();
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
     }

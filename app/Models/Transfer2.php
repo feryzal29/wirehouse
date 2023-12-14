@@ -22,11 +22,20 @@ class Transfer2 extends Model
         'status_pengiriman',
         'diterima_oleh',
         'estimate_time_arrival',
-        'material_update'
+        'material_update',
+        'parent_id'
     ];
 
     public function UserClass(): HasOneThrough
     {
         return $this->hasOneThrough(Transfer::class, User::class);
+    }
+
+    public function parent(){
+        return $this->belongsTo(self::class,'parent_id');
+    }
+
+    public function children(){
+        return $this->hasMany(self::class, 'parent_id');
     }
 }

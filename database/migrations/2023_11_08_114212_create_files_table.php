@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('files', function (Blueprint $table) {
             $table->id();
             $table->foreignId('transfer2_id')->constrained();
-            $table->string('path');
-            $table->string('path2');
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

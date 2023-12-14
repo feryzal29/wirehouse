@@ -70,7 +70,7 @@
                   <td>{{ $item->material_update }}</td>
                   <td>
                     @if ($item->estimate_time_arrival == null)
-                      
+                     
                     @else
                     {{ date('d-M-y',strtotime($item->estimate_time_arrival)) }}</td>
                     @endif
@@ -83,11 +83,22 @@
                         </button>
                         <div class="dropdown-menu">
                           <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
-                          <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                          <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
                         </div>
                       </div>
                       @else
-                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
+                          <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
+                        </div>
+                      </div>
+                        {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
+                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
+                        
                       @endif
                     @else
                       

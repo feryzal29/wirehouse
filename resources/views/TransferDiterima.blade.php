@@ -140,6 +140,7 @@
     $('#timepicker').datetimepicker({
       format: 'LT'
     })
+    
   </script>
   <!-- /.content -->
 </div>

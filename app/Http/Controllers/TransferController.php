@@ -218,6 +218,57 @@ class TransferController extends Controller
         
     }
 
+    public function InsertPengganti(Request $request){
+       
+        $request->validate([
+            'user_id'=>'required',
+            'pengirim_id' => 'required',
+            'material_id' => 'required',
+            'penerima_id' => 'required',
+            'material_dokumen' => 'required',
+            'item' => 'required',
+            'parent_id' =>'required'
+        ]);
+       
+        
+        try {
+            DB::beginTransaction();
+                $transfer2 = Transfer2::find($request->parent_id);
+                $transfer2->material_update_id = $request->material_update_id;
+                $transfer2->item = $request->item;
+                $transfer2->pengganti = 'no';
+                $transfer2->status = 'close';
+                $transfer2->save();
+                
+            // $tgl = $request->tanggal;
+            // $tgl_str = date('Y-m-d',strtotime($tgl));
+
+                $trasnfer = Transfer::create([
+                    'user_id' => $request->user_id
+                ]);
+    
+                $transfer2 = Transfer2::create([
+                    'transfer_id' => $trasnfer->id,
+                    'pengirim_id' => $request->pengirim_id,
+                    'material_id' => $request->material_id,
+                    'penerima_id' => $request->penerima_id,
+                    'material_dokumen' => $request->material_dokumen,
+                    'item' => $request->item,
+                    'pengganti' => 'no',
+                    'status' => 'close',
+                    'status_pengiriman' => "belum",
+                    'parent_id' => $request->parent_id
+                ]);
+
+            
+
+            DB::commit();
+            return redirect()->route('transfer.index')->with('success', 'Data berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -235,9 +286,12 @@ class TransferController extends Controller
             ->select([
                 'transfer2s.id as id',
                 'transfer2s.transfer_id as id_2',
+                'plan_pengirim.id as plan_pengirim_id',
                 'plan_pengirim.name as plan_pengirim_name',
+                'plan_penerima.id as plan_penerima_name_id',
                 'plan_penerima.name as plan_penerima_name',
                 'materials.material_code as materials',
+                'transfer2s.material_id',
                 'materials.material_description',
                 'materials.mnemonic',
                 'materials.part_number',
@@ -247,7 +301,8 @@ class TransferController extends Controller
                 'transfer2s.pengganti',
                 'transfer2s.status',
                 'transfer2s.status_pengiriman',
-                'transfer2s.diterima_oleh'
+                'transfer2s.diterima_oleh',
+                'transfer2s.parent_id'
             ])
             ->where('transfer2s.id', '=', $id)
             ->first();
@@ -310,6 +365,24 @@ class TransferController extends Controller
         return view('TransferDiterima',compact(['transfer','maping','plan','material']));
     }
 
+    public function BuktiPenerimaan($id){
+        $penerimaan = DB::table('transfer2s')
+        ->join('files', 'files.transfer2_id', '=', 'transfer2s.transfer_id')
+        ->join('materials', 'materials.id', '=', 'transfer2s.material_id')
+        ->select([
+            'transfer2s.diterima_oleh',
+            'files.created_at',
+            'files.path',
+            'transfer2s.item',
+            'materials.material_code',
+            'materials.material_description'
+        ])
+        ->where('transfer2s.id', '=', $id)
+        ->first();
+
+        return view('TransferBuktiDIterima',compact(['penerimaan']));
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -322,6 +395,88 @@ class TransferController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Transfer2 $transfer)
+    {
+   //dd($request);
+        $request->validate([
+            // 'status'=>'required',
+            'diterima_oleh' => 'required',
+            // 'path_image' => 'required',
+            // 'path_image.*' => 'jpg,jpeg,png|max:2000'
+            'path_image' => 'required|file|mimes:jpg,jpeg,png|max:2000' // 2MB
+        ]);
+
+        try {
+            //dd($transfer);
+             DB::beginTransaction();
+            
+            $transfer->update([
+                'status_pengiriman' => 'diterima',
+                'diterima_oleh' => $request->input('diterima_oleh'),
+            ]);
+            //dd($transfer);
+            // $image = $request->file('path_image');
+            // $path = $image->store('Images');
+            // Storage::move(storage_path($path), public_path('Images'));
+            $imageName = time().'.'.$request->path_image->extension();
+            $uploadedImage = $request->path_image->move(public_path('Images'), $imageName);
+            $imagePath = 'Images/' . $imageName;
+            
+           // dd($imagePath);
+             // file
+            // dd($image);
+
+            // if ($image) {
+            //   $path = $image->store('Images'); // Images/[nama otomatis ke generate].[extensi]
+
+              File::create([
+                'transfer2_id' => $transfer->id,
+                'path' => $imagePath,
+              ]);
+           // }
+
+            DB::commit();
+            return redirect()->route('transfer.terima');
+        } catch (\Throwable $th) {
+            DB::rollback();
+        }
+       
+
+
+        // dd($request);
+        // $request->validate([
+        //     'status_pengiriman'=>'required',
+        //     'diterima_oleh' => 'required',
+        //     'path_image' => 'required',
+        //     'path_image.*' => 'jpg,jpeg,png|max:2000'
+        // ]);
+
+        // try {
+        //      DB::beginTransaction();
+             
+        //     $transfer->update([
+        //         'status_pengiriman' => $request->input('status'),
+        //         'diterima_oleh' => $request->input('diterima_oleh'),
+        //     ]);
+
+        //     $imageName = time().'.'.$request->path_image->extension();
+        //     $uploadedImage = $request->path_image->move(public_path('Images'), $imageName);
+        //     $imagePath = 'Images/' . $imageName;
+
+        //     $file = File::create([
+        //         'transfer2_id' => $transfer->id,
+        //         'path' => $imagePath,
+        //     ]);
+
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
+       
+
+        // return redirect()->back()->with(['success'=>'Data Berhasil ditambah']);
+    }
+
+    public function update2(Request $request, Transfer2 $transfer)
     {
     //dd($transfer);
         $request->validate([
@@ -356,7 +511,7 @@ class TransferController extends Controller
 
               File::create([
                 'transfer2_id' => $transfer->id,
-                'path' => $imagePath,
+                'path2' => $imagePath,
               ]);
            // }
 
@@ -404,15 +559,16 @@ class TransferController extends Controller
 
     public function Pengganti(Request $request, Transfer2 $transfer)
     {
+        // dd($request);
         $request->validate([
-            'material_update'=>'required',
+            'material_update_id'=>'required',
             'item' => 'required',
-            'pengganti' => 'required',
-            'status' => 'required',
         ]);
+        //dd($request);
+
 
         $transfer->update([
-            'material_update' => $request->input('material_update'),
+            'material_update_id' => $request->input('material_update_id'),
             'item' => $request->input('item'),
             'pengganti' => 'no',
             'status' => 'close',

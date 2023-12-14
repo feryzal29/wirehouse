@@ -68,11 +68,14 @@ Route::controller(TransferController::class)->group(function (){
     Route::get('transfer','index')->name('transfer.index')->middleware('role:user|administrator');
     Route::get('transfer/{id}/show','show')->name('transfer.show')->middleware('role:user|administrator');
     Route::get('transfer/{id}/penerimaan','Penerimaan')->name('transfer.penerimaan')->middleware('role:user|administrator');
+    Route::get('transfer/{id}/bukti-penerimaan','BuktiPenerimaan')->name('bukti.penerimaan')->middleware('role:user|administrator');
     Route::get('transfer/masuk','TransferMasukGet')->name('transfer.masuk')->middleware('role:user|administrator');
     Route::get('transfer/masuk-terima','TransferMasukGetDiterima')->name('transfer.terima')->middleware('role:user|administrator');
     Route::get('transfer/post','TransferKeluarPost')->name('transfer.form')->middleware('role:user|administrator');
     Route::get('transfer/{id}/delete','destroy')->name('transfer.delete')->middleware('role:user|administrator');
     Route::post('transfer/add','store')->name('transfer.store')->middleware('role:user|administrator');
+    Route::post('transfer/pengganti','InsertPengganti')->name('transfer.pengganti2')->middleware('role:user|administrator');
     Route::post('transfer/{transfer}/update','update')->name('transfer.update')->middleware('role:user|administrator');    
     Route::put('transfer/{transfer}/pengganti','Pengganti')->name('transfer.pengganti')->middleware('role:user|administrator'); 
 });
+
