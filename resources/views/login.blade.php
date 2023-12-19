@@ -19,7 +19,8 @@
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="#" class="h1"><b>WIRE</b>HOUSE</a>
+      <img src="{{ asset('Images/logo.png') }}" width="200"  alt="" srcset="">
+      <a href="#" class="h4"><b>WAREHOUSE & INVENTORY</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>

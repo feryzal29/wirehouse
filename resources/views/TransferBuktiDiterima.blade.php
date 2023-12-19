@@ -28,6 +28,10 @@
         </div>
         <div class="card-body">
         <!-- /.card-header -->
+        <div class="form-group">
+          <label for="exampleInputEmail1">Diterima Oleh :</label>
+          <input type="text" class="form-control" value="{{ $penerimaan->diterima_oleh }}" readonly>
+        </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Material Code :</label>
             <input type="text" class="form-control" value="{{ $penerimaan->material_code }}" readonly>
