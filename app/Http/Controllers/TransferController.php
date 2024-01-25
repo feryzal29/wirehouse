@@ -56,6 +56,42 @@ class TransferController extends Controller
         return view('TransferKeluarList',compact(['transfer']));
     }
 
+    public function TransferGanti(){
+        $maping = mapinguser::where('user_id',Auth::user()->id)
+                    ->first();
+        $transfer = DB::table('transfer2s')
+                ->join('plans as plan_pengirim', 'plan_pengirim.id', '=', 'transfer2s.pengirim_id')
+                ->join('plans as plan_penerima', 'plan_penerima.id', '=', 'transfer2s.penerima_id')
+                ->join('materials', 'materials.id', '=', 'transfer2s.material_id')
+                ->leftJoin('materials as material_update', 'material_update.id', '=', 'transfer2s.material_update_id')
+                ->join('transfers', 'transfers.id', '=', 'transfer2s.transfer_id')
+                ->join('users', 'users.id', '=', 'transfers.user_id')
+                ->select([
+                    'users.id as id_user',
+                    'transfer2s.id as id',
+                    'transfer2s.transfer_id as tf',
+                    'plan_pengirim.name as plan_pengirim_name',
+                    'plan_penerima.name as plan_penerima_name',
+                    'materials.material_code as materials',
+                    'materials.material_description',
+                    'materials.mnemonic',
+                    'materials.part_number',
+                    'transfer2s.material_dokumen',
+                    'transfer2s.item',
+                    'users.name as pic',
+                    'transfer2s.pengganti',
+                    'transfer2s.status',
+                    'transfer2s.status_pengiriman',
+                    'transfer2s.diterima_oleh',
+                    'transfer2s.estimate_time_arrival',
+                    'material_update.material_description as material_update'
+                ])
+                ->where('transfer2s.pengirim_id', '=', $maping->plan_id)
+                ->get();
+
+        return view('TransferKeluarList',compact(['transfer']));
+    }
+
     public function TransferMasukGet(){
         $maping = mapinguser::where('user_id',Auth::user()->id)
         ->first();

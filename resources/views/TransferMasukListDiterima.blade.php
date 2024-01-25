@@ -41,6 +41,7 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
+              <th>Bukti Penerima</th>
               {{-- <th>Action</th> --}}
             </tr>
             </thead>
@@ -65,6 +66,9 @@
                     @endif
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
+                  <td>
+                    <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti Penerimaan</a></td>
+                  {{-- <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a> --}}
                   {{-- <td> --}}
                     {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
                     {{-- <form action="{{ route('transfer.update', $item->id) }}" method="post">
@@ -102,6 +106,7 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
+              <th>Bukti Penerima</th>
               {{-- <th>Action</th> --}}
             </tr>
            </tfoot>

@@ -59,7 +59,7 @@
   
           <div class="form-group">
             <label for="exampleInputEmail1">Diterima Oleh :</label>
-            <input type="text" class="form-control" name="diterima_oleh" value="{{ Auth::user()->name }}" readonly>
+            <input type="text" class="form-control" name="diterima_oleh" placeholder="Nama Penerima...">
           </div>
 
           <div class="form-group">
