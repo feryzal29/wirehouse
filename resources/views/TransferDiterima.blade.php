@@ -37,6 +37,11 @@
           </div>
 
           <div class="form-group">
+            <label for="exampleInputEmail1">Nama Pengirim :</label>
+            <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->nama_pengirim }}" readonly>
+          </div>
+
+          <div class="form-group">
             <label for="exampleInputEmail1">Plan Penerima :</label>
             <input type="text" class="form-control" value="{{ $transfer->plan_penerima_name }}" readonly>
           </div>
@@ -46,10 +51,14 @@
             <input type="text" class="form-control" value="{{ $transfer->materials }} - {{ $transfer->material_description }}" readonly>
           </div>
 
-         
+          
           <div class="form-group">
             <label for="exampleInputEmail1">Material Document :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Matdoc Pengganti :</label>
+            <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->matdoc_pengganti }}" readonly>
           </div>
           
           <div class="form-group">
@@ -70,6 +79,21 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Status :</label>
             <input type="text" class="form-control" name="status" value="{{ $transfer->status }}" readonly>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">PR Pengganti :</label>
+            <input type="number" class="form-control" name="pr_pengganti" placeholder="Nama Penerima...">
+          </div>
+
+          <label>ETA Meterial Pengganti :</label>
+          <div class="form-group">
+              <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                  <input type="text" name="tanggal" class="form-control datetimepicker-input" data-target="#reservationdate"/>
+                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                  </div>
+              </div>
           </div>
             <!-- <label for="customFile">Custom File</label> -->
 

@@ -32,9 +32,25 @@
           <label for="exampleInputEmail1">Diterima Oleh :</label>
           <input type="text" class="form-control" value="{{ $penerimaan->diterima_oleh }}" readonly>
         </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Material Dokumen :</label>
+          <input type="text" class="form-control" value="{{ $penerimaan->material_dokumen }}" readonly>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Matdoc Pengganti :</label>
+          <input type="text" class="form-control" value="{{ $penerimaan->matdoc_pengganti }}" readonly>
+        </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Material Code :</label>
             <input type="text" class="form-control" value="{{ $penerimaan->material_code }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">PR Pengganti :</label>
+            <input type="text" class="form-control" value="{{ $penerimaan->pr_pengganti }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">ETA Material Pengganti :</label>
+            <input type="text" class="form-control" value="{{ $penerimaan->estimate_time_arrival }}" readonly>
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Material Description :</label>

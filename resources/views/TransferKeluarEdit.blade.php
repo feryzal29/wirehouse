@@ -58,10 +58,14 @@
               @endforeach
             </select>
           </div>
-  
+          
           <div class="form-group">
             <label for="exampleInputEmail1">Material Document :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Matdoc Pengganti :</label>
+            <input type="text" class="form-control" name="matdoc_pengganti" placeholder="Matdoc Pengganti">
           </div>
           
           <div class="form-group">
@@ -70,8 +74,8 @@
           </div>
   
           <div class="form-group">
-            <label for="exampleInputEmail1">PIC :</label>
-            <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
+            <label for="exampleInputEmail1">Nama Pengirim :</label>
+            <input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim">
           </div>
 
           

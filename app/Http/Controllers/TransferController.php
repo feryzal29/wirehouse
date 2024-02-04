@@ -56,6 +56,44 @@ class TransferController extends Controller
         return view('TransferKeluarList',compact(['transfer']));
     }
 
+    public function indexPengganti(){
+        $maping = mapinguser::where('user_id',Auth::user()->id)
+        ->first();
+        
+        $transfer = DB::table('transfer2s')
+            ->join('plans as plan_pengirim', 'plan_pengirim.id', '=', 'transfer2s.pengirim_id')
+            ->join('plans as plan_penerima', 'plan_penerima.id', '=', 'transfer2s.penerima_id')
+            ->join('materials', 'materials.id', '=', 'transfer2s.material_id')
+            ->leftJoin('materials as material_update', 'material_update.id', '=', 'transfer2s.material_update_id')
+            ->join('transfers', 'transfers.id', '=', 'transfer2s.transfer_id')
+            ->join('users', 'users.id', '=', 'transfers.user_id')
+            ->select([
+                'users.id as id_user',
+                'transfer2s.id as id',
+                'transfer2s.transfer_id as tf',
+                'plan_pengirim.name as plan_pengirim_name',
+                'plan_penerima.name as plan_penerima_name',
+                'materials.material_code as materials',
+                'materials.material_description',
+                'materials.mnemonic',
+                'materials.part_number',
+                'transfer2s.material_dokumen',
+                'transfer2s.item',
+                'users.name as pic',
+                'transfer2s.pengganti',
+                'transfer2s.status',
+                'transfer2s.status_pengiriman',
+                'transfer2s.diterima_oleh',
+                'transfer2s.estimate_time_arrival',
+                'material_update.material_description as material_update'
+            ])
+            ->where('transfer2s.pengirim_id', '=', $maping->plan_id)
+            ->where('transfer2s.pengganti', '=', 'yes')
+            ->get();
+
+        return view('TransferPenggantiList',compact(['transfer']));
+    }
+
     public function TransferGanti(){
         $maping = mapinguser::where('user_id',Auth::user()->id)
                     ->first();
@@ -197,15 +235,14 @@ class TransferController extends Controller
             'material_dokumen' => 'required',
             'item' => 'required',
             'pengganti' => 'required',
-            'status' => 'required',
+            'nama_pengirim'=> 'required'
         ]);
 
         
         try {
             DB::beginTransaction();
-            $tgl = $request->tanggal;
-            $tgl_str = date('Y-m-d',strtotime($tgl));
-            if($tgl_str == null){
+
+            if($request->pengganti == "yes"){
                 $trasnfer = Transfer::create([
                     'user_id' => $request->user_id
                 ]);
@@ -217,17 +254,18 @@ class TransferController extends Controller
                     'penerima_id' => $request->penerima_id,
                     'material_dokumen' => $request->material_dokumen,
                     'item' => $request->item,
-                    'pengganti' => $request->pengganti,
-                    'status' => $request->status,
-                    'status_pengiriman' => "belum"
+                    'pengganti' => "yes",
+                    'status' => "open",
+                    'status_pengiriman' => "belum",
+                    'lokasi_transit' => $request->lokasi_transit,
+                    'nama_pengirim' => $request->nama_pengirim
                 ]);
 
             } else {
                 $trasnfer = Transfer::create([
                     'user_id' => $request->user_id
                 ]);
-                $tgl = $request->tanggal;
-                $tgl_str = date('Y-m-d',strtotime($tgl));
+
                 $transfer2 = Transfer2::create([
                     'transfer_id' => $trasnfer->id,
                     'pengirim_id' => $request->pengirim_id,
@@ -235,17 +273,16 @@ class TransferController extends Controller
                     'penerima_id' => $request->penerima_id,
                     'material_dokumen' => $request->material_dokumen,
                     'item' => $request->item,
-                    'pengganti' => $request->pengganti,
-                    'status' => $request->status,
+                    'pengganti' => "no",
+                    'status' => "close",
                     'status_pengiriman' => "belum",
-                    'estimate_time_arrival' => $tgl_str
+                    'lokasi_transit' => $request->lokasi_transit,
+                    'nama_pengirim' => $request->nama_pengirim
                 ]);
 
                 
             }
 
-            
-            
             DB::commit();
             return redirect()->route('transfer.index')->with('success', 'Data berhasil diperbarui.');
         } catch (\Throwable $th) {
@@ -263,6 +300,7 @@ class TransferController extends Controller
             'penerima_id' => 'required',
             'material_dokumen' => 'required',
             'item' => 'required',
+            'matdoc_pengganti' => 'required',
             'parent_id' =>'required'
         ]);
        
@@ -275,9 +313,6 @@ class TransferController extends Controller
                 $transfer2->pengganti = 'no';
                 $transfer2->status = 'close';
                 $transfer2->save();
-                
-            // $tgl = $request->tanggal;
-            // $tgl_str = date('Y-m-d',strtotime($tgl));
 
                 $trasnfer = Transfer::create([
                     'user_id' => $request->user_id
@@ -293,7 +328,9 @@ class TransferController extends Controller
                     'pengganti' => 'no',
                     'status' => 'close',
                     'status_pengiriman' => "belum",
-                    'parent_id' => $request->parent_id
+                    'parent_id' => $request->parent_id,
+                    'nama_pengirim' => $request->nama_pengirim,
+                    'matdoc_pengganti' => $request->matdoc_pengganti
                 ]);
 
             
@@ -301,6 +338,7 @@ class TransferController extends Controller
             DB::commit();
             return redirect()->route('transfer.index')->with('success', 'Data berhasil diperbarui.');
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollback();
         }
     }
@@ -382,7 +420,9 @@ class TransferController extends Controller
                 'transfer2s.pengganti',
                 'transfer2s.status',
                 'transfer2s.status_pengiriman',
-                'transfer2s.diterima_oleh'
+                'transfer2s.diterima_oleh',
+                'transfer2s.matdoc_pengganti',
+                'transfer2s.nama_pengirim',
             ])
             ->where('transfer2s.id', '=', $id)
             ->first();
@@ -407,6 +447,11 @@ class TransferController extends Controller
         ->join('materials', 'materials.id', '=', 'transfer2s.material_id')
         ->select([
             'transfer2s.diterima_oleh',
+            'transfer2s.pr_pengganti',
+            'transfer2s.estimate_time_arrival',
+            'transfer2s.lokasi_transit',
+            'transfer2s.material_dokumen',
+            'transfer2s.matdoc_pengganti',
             'files.created_at',
             'files.path',
             'transfer2s.item',
@@ -437,17 +482,20 @@ class TransferController extends Controller
             // 'status'=>'required',
             'diterima_oleh' => 'required',
             // 'path_image' => 'required',
-            // 'path_image.*' => 'jpg,jpeg,png|max:2000'
+            // 'path_image.*' => 'jpg,jpeg,pg|max:2000'
             'path_image' => 'required|file|mimes:jpg,jpeg,png|max:2000' // 2MB
         ]);
 
         try {
             //dd($transfer);
              DB::beginTransaction();
-            
+             $tgl = $request->input('tanggal');
+             $tgl_str = date('Y-m-d',strtotime($tgl));
             $transfer->update([
                 'status_pengiriman' => 'diterima',
                 'diterima_oleh' => $request->input('diterima_oleh'),
+                'estimate_time_arrival' => $tgl_str,
+                'pr_pengganti' => $request->input('pr_pengganti')
             ]);
             //dd($transfer);
             // $image = $request->file('path_image');

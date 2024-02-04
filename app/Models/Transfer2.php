@@ -23,7 +23,11 @@ class Transfer2 extends Model
         'diterima_oleh',
         'estimate_time_arrival',
         'material_update',
-        'parent_id'
+        'parent_id',
+        'lokasi_transit',
+        'nama_pengirim',
+        'pr_pengganti',
+        'matdoc_pengganti'
     ];
 
     public function UserClass(): HasOneThrough

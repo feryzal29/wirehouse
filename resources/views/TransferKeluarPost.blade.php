@@ -63,11 +63,11 @@
           </div>
   
           <div class="form-group">
-            <label for="exampleInputEmail1">PIC :</label>
-            <input type="text" class="form-control" value="{{ Auth::user()->name }}" readonly>
+            <label for="exampleInputEmail1">Nama Pengirim :</label>
+            <input type="text" class="form-control" name="nama_pengirim" placeholder="Nama Pengirim">
           </div>
 
-          <label for="exampleInputEmail1">Pengganti :</label><br>
+          <label for="exampleInputEmail1">Permintaan Pengganti :</label><br>
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="pengganti" id="inlineRadio1" value="yes">
             <label class="form-check-label" for="inlineRadio1">YES</label>
@@ -77,24 +77,11 @@
             <label class="form-check-label" for="inlineRadio1">NO</label>
           </div><br>
 
-          <label for="exampleInputEmail1">Status :</label><br>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="open">
-            <label class="form-check-label" for="inlineRadio1">OPEN</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="close">
-            <label class="form-check-label" for="inlineRadio1">CLOSE</label>
-          </div><br>
-          <label>Estimate Time Arrival :</label>
           <div class="form-group">
-              <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                  <input type="text" name="tanggal" class="form-control datetimepicker-input" data-target="#reservationdate"/>
-                  <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                      <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                  </div>
-              </div>
+            <label for="exampleInputEmail1">Lokasi Transit Material :</label>
+            <input type="text" class="form-control" name="lokasi_transit" value="">
           </div>
+         
 
           
         </div>

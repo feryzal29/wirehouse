@@ -66,6 +66,7 @@ Route::controller(MaterialController::class)->group(function (){
 
 Route::controller(TransferController::class)->group(function (){
     Route::get('transfer','index')->name('transfer.index')->middleware('role:user|administrator');
+    Route::get('transfer/listpengganti','indexPengganti')->name('transfer.indexPengganti')->middleware('role:user|administrator');
     Route::get('transfer/{id}/show','show')->name('transfer.show')->middleware('role:user|administrator');
     Route::get('transfer/{id}/penerimaan','Penerimaan')->name('transfer.penerimaan')->middleware('role:user|administrator');
     Route::get('transfer/{id}/bukti-penerimaan','BuktiPenerimaan')->name('bukti.penerimaan')->middleware('role:user|administrator');

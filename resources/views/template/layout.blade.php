@@ -112,6 +112,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('transfer.indexPengganti') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Transfer Pengganti</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('transfer.masuk') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Masuk Belum diterima</p>

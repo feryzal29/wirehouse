@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('material_id')->constrained();
             $table->foreignId('penerima_id')->constrained('plans','id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('material_dokumen');
+            $table->string('matdoc_pengganti')->nullable();
             $table->integer('item');
             $table->enum('pengganti',['yes','no']);
             $table->enum('status',['open','close']);
@@ -27,6 +28,9 @@ return new class extends Migration
             //$table->foreignId('material_update')->constrained('materials','id')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->integer('material_update_id')->nullable();
             $table->integer('parent_id')->nullable();
+            $table->string('lokasi_transit')->nullable();
+            $table->string('nama_pengirim');
+            $table->string('pr_pengganti')->nullable();
             $table->timestamps();
         });
     }
