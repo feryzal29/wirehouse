@@ -32,7 +32,7 @@
           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
           <input type="hidden" name="parent_id" value="{{ $transfer->id }}">
         <div class="card-body">
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="exampleInputEmail1">Plan Pengirim :</label>
             <input type="text" class="form-control" value="{{ $transfer->plan_pengirim_name }}" readonly>
             <input type="hidden" name="pengirim_id" value="{{ $transfer->plan_pengirim_id }}">
@@ -42,6 +42,17 @@
             <label for="exampleInputEmail1">Plan Penerima :</label>
             <input type="hidden" name="penerima_id" value="{{ $transfer->plan_penerima_name_id }}">
             <input type="text" class="form-control" value="{{ $transfer->plan_penerima_name }}" readonly>
+          </div> --}}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Plan Pengirim :</label>
+            <input type="text" class="form-control" value="{{ $transfer->plan_penerima_name }}" readonly>
+            <input type="hidden" name="pengirim_id" value="{{ $transfer->plan_penerima_name_id }}">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Plan Penerima :</label>
+            <input type="hidden" name="penerima_id" value="{{ $transfer->plan_pengirim_id }}">
+            <input type="text" class="form-control" value="{{ $transfer->plan_pengirim_name }}" readonly>
           </div>
 
           <div class="form-group">

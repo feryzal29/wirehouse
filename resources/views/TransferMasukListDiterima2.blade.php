@@ -7,7 +7,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Transfer Keluar</h1>
+          <h1 class="m-0">Transfer Pengganti</h1>
         </div><!-- /.col -->
 
       </div><!-- /.row -->
@@ -20,7 +20,7 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title" style="float: left;">Transfer Keluar</h3>
+          <h3 class="card-title" style="float: left;">Transfer Pengganti</h3>
           <a href="{{ route('transfer.form') }}" class="btn btn-primary" style="float: right;">Tambah</a>
           {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="float: right;">Tambah</button> --}}
         </div>
@@ -29,7 +29,7 @@
           <table id="example1" class="table table-bordered table-striped">
             <thead>
             <tr>
-              <th>Plan</th>
+              {{-- <th>Plan</th> --}}
               <th>Material</th>
               <th>Material Description</th>
               <th>Mnemonic</th>
@@ -41,15 +41,14 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
-              <th>Material Pengganti</th>
-              <th>Estimate Time Arrival</th>
-              <th>Action</th>
+              <th>Bukti Penerima</th>
+              {{-- <th>Action</th> --}}
             </tr>
             </thead>
             <tbody>
               @foreach ($transfer as $item)
                 <tr>
-                  <td>{{ $item->plan_penerima_name }}</td>
+                  {{-- <td>{{ $item->plan_penerima_name }}</td> --}}
                   <td>{{ $item->materials }}</td>
                   <td>{{ $item->material_description }}</td>
                   <td>{{ $item->mnemonic }}</td>
@@ -67,59 +66,56 @@
                     @endif
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
-                  <td>{{ $item->material_update }}</td>
                   <td>
-                    @if ($item->estimate_time_arrival == null)
-                     
-                    @else
-                    {{ date('d-M-y',strtotime($item->estimate_time_arrival)) }}</td>
-                    @endif
-                  <td>
-                    @if ($item->id_user == Auth::user()->id)
-                      @if ($item->status == 'open')
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @if ($item->status == 'open')
+                      {{-- <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti </a>
+                      <a href="{{ route('transfer.show', $item->id) }}" class="btn btn-success">Ganti</a> --}}
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Action
                         </button>
-                        @if ($item->status_pengiriman == 'belum')
-                        <div class="dropdown-menu">
-                          {{-- <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a> --}}
-                          {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a> --}}
-                          <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
-                        </div>
-                        @else
-                        <div class="dropdown-menu">
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                           <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
-                          {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a> --}}
-                          <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
-                        </div>
-                        @endif
-                        
-                      </div>
-                      @else
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Action
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
-                          <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
+                          <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
                         </div>
                       </div>
-                        {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
-                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
-                        
-                      @endif
+                      {{-- <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
+                        <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
+                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
+                      </div> --}}
+                    </td>
                     @else
-                      
+                      <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti Penerimaan</a></td>
                     @endif
-                </td>
+                   
+                  {{-- <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a> --}}
+                  {{-- <td> --}}
+                    {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
+                    {{-- <form action="{{ route('transfer.update', $item->id) }}" method="post">
+                      @csrf
+                      @method('PUT')
+                      <input type="hidden" name="status" value="diterima">
+                      <input type="hidden" name="diterima_oleh" value="{{ Auth::user()->name }}">
+
+                     <input class="btn btn-success" type="submit" value="Terima">
+                    </form> --}}
+                    {{-- <div class="btn-group">
+                      <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Action
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" onclick="return confirm('Are you sure?')" href="" data-method="delete">Delete</a>
+                      </div>
+                    </div> --}}
+                {{-- </td> --}}
                 </tr>   
               @endforeach
               
            <tfoot>
             <tr>
-              <th>Plan</th>
+              {{-- <th>Plan</th> --}}
               <th>Material</th>
               <th>Material Description</th>
               <th>Mnemonic</th>
@@ -131,9 +127,8 @@
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
-              <th>Material Pengganti</th>
-              <th>Estimate Time Arrival</th>
-              <th>Action</th>
+              <th>Bukti Penerima</th>
+              {{-- <th>Action</th> --}}
             </tr>
            </tfoot>
           </table>

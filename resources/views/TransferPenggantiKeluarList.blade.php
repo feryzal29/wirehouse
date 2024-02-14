@@ -49,7 +49,7 @@
             <tbody>
               @foreach ($transfer as $item)
                 <tr>
-                  <td>{{ $item->plan_penerima_name }}</td>
+                  <td>{{ $item->plan_pengirim_name }}</td>
                   <td>{{ $item->materials }}</td>
                   <td>{{ $item->material_description }}</td>
                   <td>{{ $item->mnemonic }}</td>

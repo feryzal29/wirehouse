@@ -48,10 +48,18 @@
             <label for="exampleInputEmail1">PR Pengganti :</label>
             <input type="text" class="form-control" value="{{ $penerimaan->pr_pengganti }}" readonly>
           </div>
+          @if ($penerimaan->estimate_time_arrival == "1970-01-01")
+          <div class="form-group">
+            <label for="exampleInputEmail1">ETA Material Pengganti :</label>
+            <input type="text" class="form-control" value="" readonly>
+          </div>
+          @else
           <div class="form-group">
             <label for="exampleInputEmail1">ETA Material Pengganti :</label>
             <input type="text" class="form-control" value="{{ $penerimaan->estimate_time_arrival }}" readonly>
           </div>
+          @endif
+         
           <div class="form-group">
             <label for="exampleInputEmail1">Material Description :</label>
             <input type="text" class="form-control" value="{{ $penerimaan->material_description }}" readonly>

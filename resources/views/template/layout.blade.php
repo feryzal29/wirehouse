@@ -72,7 +72,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-      <span class="brand-text font-weight-light">MATERIAL TRANSFER SYSTEM</span>
+      <span class="brand-text font-weight-light">STO SITE TO SITE</span>
     </a>
 
     <!-- Sidebar -->
@@ -112,7 +112,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('transfer.indexPengganti') }}" class="nav-link">
+                <a href="{{ route('transfer.materialpengganti') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Transfer Pengganti</p>
                 </a>

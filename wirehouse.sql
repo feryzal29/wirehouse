@@ -60,7 +60,7 @@ CREATE TABLE `files` (
   PRIMARY KEY (`id`),
   KEY `files_transfer2_id_foreign` (`transfer2_id`),
   CONSTRAINT `files_transfer2_id_foreign` FOREIGN KEY (`transfer2_id`) REFERENCES `transfer2s` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `files` (
 
 LOCK TABLES `files` WRITE;
 /*!40000 ALTER TABLE `files` DISABLE KEYS */;
-INSERT INTO `files` VALUES (5,2,'Images/1702537570.jpg','2023-12-14 00:06:10','2023-12-14 00:06:10'),(6,3,'Images/1702991026.jpg','2023-12-19 06:03:46','2023-12-19 06:03:46'),(7,4,'Images/1702991149.png','2023-12-19 06:05:49','2023-12-19 06:05:49'),(8,5,'Images/1704273647.png','2024-01-03 02:20:47','2024-01-03 02:20:47'),(9,6,'Images/1704273814.png','2024-01-03 02:23:34','2024-01-03 02:23:34'),(10,7,'Images/1704274582.png','2024-01-03 02:36:22','2024-01-03 02:36:22'),(11,7,'Images/1704274591.png','2024-01-03 02:36:31','2024-01-03 02:36:31');
+INSERT INTO `files` VALUES (1,1,'Images/1707043762.png','2024-02-04 03:49:22','2024-02-04 03:49:22'),(2,3,'Images/1707044543.png','2024-02-04 04:02:23','2024-02-04 04:02:23'),(3,4,'Images/1707044682.png','2024-02-04 04:04:42','2024-02-04 04:04:42');
 /*!40000 ALTER TABLE `files` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `mapingusers` (
   KEY `mapingusers_plan_id_foreign` (`plan_id`),
   CONSTRAINT `mapingusers_plan_id_foreign` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`),
   CONSTRAINT `mapingusers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -100,7 +100,7 @@ CREATE TABLE `mapingusers` (
 
 LOCK TABLES `mapingusers` WRITE;
 /*!40000 ALTER TABLE `mapingusers` DISABLE KEYS */;
-INSERT INTO `mapingusers` VALUES (1,1,1,'2023-12-13 23:45:05','2023-12-13 23:45:05'),(2,2,2,'2023-12-13 23:45:11','2023-12-13 23:45:11'),(3,3,3,'2024-01-03 02:17:51','2024-01-03 02:17:51');
+INSERT INTO `mapingusers` VALUES (1,1,1,NULL,NULL),(2,2,2,NULL,NULL);
 /*!40000 ALTER TABLE `mapingusers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `materials` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `materials` (
 
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-INSERT INTO `materials` VALUES (1,'CO00200607','ELECTRODE WELDING','ELECTRODE WELDING','LB52U 4,0MM','2023-12-13 23:45:46','2023-12-13 23:45:46'),(2,'CO00200621','OIL ABSORBENT','WYPALL','42411','2023-12-13 23:46:04','2023-12-13 23:46:04'),(3,'CO00200638','SOS NON E ANALYSIS','CAT','HP-426','2023-12-13 23:46:21','2023-12-13 23:46:21'),(4,'123','Uji coba','123','999','2024-01-03 02:18:35','2024-01-03 02:18:35'),(5,'SP00602531','REREIVER DRYER LONG','DENSO','447810-0150','2024-01-03 02:31:42','2024-01-03 02:31:42');
+INSERT INTO `materials` VALUES (1,'C000400001','KOMATSU','08000-02207 (DEL)','[NOT USED] BATTERY N70\r','2024-02-04 09:29:17','2024-02-04 09:45:50'),(2,'CM00100001','SCANIA','1752264','CONDENSOR\r','2024-02-04 09:29:21','2024-02-04 09:45:53'),(3,'CM00100002','VOLVO','11110696','RADIATOR\r','2024-02-04 09:29:25','2024-02-04 09:45:56');
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,7 +207,7 @@ CREATE TABLE `model_has_roles` (
 
 LOCK TABLES `model_has_roles` WRITE;
 /*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
-INSERT INTO `model_has_roles` VALUES (1,'App\\Models\\User',1),(2,'App\\Models\\User',2),(2,'App\\Models\\User',3);
+INSERT INTO `model_has_roles` VALUES (1,'App\\Models\\User',1),(2,'App\\Models\\User',2);
 /*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +317,7 @@ CREATE TABLE `plans` (
 
 LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
-INSERT INTO `plans` VALUES (1,'BRE','2023-12-13 23:37:30','2023-12-13 23:37:30'),(2,'EBL','2023-12-13 23:37:30','2023-12-13 23:37:30'),(3,'AGM','2023-12-13 23:37:30','2023-12-13 23:37:30'),(4,'FAD','2023-12-13 23:37:30','2023-12-13 23:37:30');
+INSERT INTO `plans` VALUES (1,'BRE','2024-02-04 03:46:38','2024-02-04 03:46:38'),(2,'EBL','2024-02-04 03:46:38','2024-02-04 03:46:38'),(3,'AGM','2024-02-04 03:46:38','2024-02-04 03:46:38'),(4,'FAD','2024-02-04 03:46:38','2024-02-04 03:46:38');
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +371,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'administrator','web','2023-12-13 23:37:30','2023-12-13 23:37:30'),(2,'user','web','2023-12-13 23:37:30','2023-12-13 23:37:30');
+INSERT INTO `roles` VALUES (1,'administrator','web','2024-02-04 03:46:38','2024-02-04 03:46:38'),(2,'user','web','2024-02-04 03:46:38','2024-02-04 03:46:38');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,6 +389,7 @@ CREATE TABLE `transfer2s` (
   `material_id` bigint(20) unsigned NOT NULL,
   `penerima_id` bigint(20) unsigned NOT NULL,
   `material_dokumen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `matdoc_pengganti` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `item` int(11) NOT NULL,
   `pengganti` enum('yes','no') COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('open','close') COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -397,6 +398,9 @@ CREATE TABLE `transfer2s` (
   `estimate_time_arrival` date DEFAULT NULL,
   `material_update_id` int(11) DEFAULT NULL,
   `parent_id` int(11) DEFAULT NULL,
+  `lokasi_transit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_pengirim` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pr_pengganti` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -408,7 +412,7 @@ CREATE TABLE `transfer2s` (
   CONSTRAINT `transfer2s_penerima_id_foreign` FOREIGN KEY (`penerima_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `transfer2s_pengirim_id_foreign` FOREIGN KEY (`pengirim_id`) REFERENCES `plans` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `transfer2s_transfer_id_foreign` FOREIGN KEY (`transfer_id`) REFERENCES `transfers` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -417,7 +421,7 @@ CREATE TABLE `transfer2s` (
 
 LOCK TABLES `transfer2s` WRITE;
 /*!40000 ALTER TABLE `transfer2s` DISABLE KEYS */;
-INSERT INTO `transfer2s` VALUES (1,1,1,3,2,'001',9,'no','close','diterima','user','2023-12-14',NULL,NULL,'2023-12-13 23:46:52','2023-12-14 00:04:42'),(2,2,1,1,2,'001',9,'no','close','diterima','user',NULL,NULL,1,'2023-12-14 00:04:42','2023-12-14 00:06:10'),(3,3,1,3,2,'P01',1,'no','close','diterima','user','2023-12-19',NULL,NULL,'2023-12-19 06:02:55','2023-12-19 06:04:50'),(4,4,1,2,2,'P01',1,'no','close','diterima','user',NULL,NULL,3,'2023-12-19 06:04:50','2023-12-19 06:05:49'),(5,5,1,4,2,'zz',9,'no','close','diterima','user','2024-01-03',NULL,NULL,'2024-01-03 02:19:26','2024-01-03 02:22:23'),(6,6,1,3,2,'zz',9,'no','close','diterima','user',NULL,NULL,5,'2024-01-03 02:22:23','2024-01-03 02:23:34'),(7,7,1,5,3,'12234444',1,'no','close','diterima','coba','1970-01-01',NULL,NULL,'2024-01-03 02:32:42','2024-01-03 02:36:22');
+INSERT INTO `transfer2s` VALUES (1,1,1,1,2,'123',NULL,1,'no','close','diterima','Anonime','2024-02-04',NULL,NULL,'Gudang Transit','Aku','1','2024-02-04 03:47:49','2024-02-04 03:51:57'),(2,2,1,2,2,'123',NULL,1,'no','close','belum',NULL,NULL,NULL,1,NULL,'Initial',NULL,'2024-02-04 03:51:57','2024-02-04 03:51:57'),(3,3,2,1,1,'001',NULL,1,'no','close','diterima','L','2024-02-04',NULL,NULL,'abc','HHH','-2','2024-02-04 04:01:03','2024-02-04 04:03:01'),(4,4,2,2,1,'001','009900',1,'no','close','diterima','asd','2024-02-05',NULL,3,NULL,'ABCD','1','2024-02-04 04:03:01','2024-02-04 04:04:42');
 /*!40000 ALTER TABLE `transfer2s` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,7 +440,7 @@ CREATE TABLE `transfers` (
   PRIMARY KEY (`id`),
   KEY `transfers_user_id_foreign` (`user_id`),
   CONSTRAINT `transfers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -445,7 +449,7 @@ CREATE TABLE `transfers` (
 
 LOCK TABLES `transfers` WRITE;
 /*!40000 ALTER TABLE `transfers` DISABLE KEYS */;
-INSERT INTO `transfers` VALUES (1,1,'2023-12-13 23:46:52','2023-12-13 23:46:52'),(2,1,'2023-12-14 00:04:42','2023-12-14 00:04:42'),(3,1,'2023-12-19 06:02:55','2023-12-19 06:02:55'),(4,1,'2023-12-19 06:04:50','2023-12-19 06:04:50'),(5,1,'2024-01-03 02:19:26','2024-01-03 02:19:26'),(6,1,'2024-01-03 02:22:23','2024-01-03 02:22:23'),(7,1,'2024-01-03 02:32:42','2024-01-03 02:32:42');
+INSERT INTO `transfers` VALUES (1,1,'2024-02-04 03:47:49','2024-02-04 03:47:49'),(2,1,'2024-02-04 03:51:57','2024-02-04 03:51:57'),(3,2,'2024-02-04 04:01:03','2024-02-04 04:01:03'),(4,2,'2024-02-04 04:03:01','2024-02-04 04:03:01');
 /*!40000 ALTER TABLE `transfers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -467,7 +471,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -476,7 +480,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'administrator','admin@app.com',NULL,'$2y$10$iEBZRk4ORbDxWAFlphqPRePXnpo3q8wa4grWieyDWsEP2lmBgroOa',NULL,'2023-12-13 23:37:30','2023-12-13 23:37:30'),(2,'user','user@app.com',NULL,'$2y$10$Vjb2INV1DGIHNOko/9Q6Z.7V0vqa4tyk1bXf4Bz6G2jn..aW9lpSq',NULL,'2023-12-13 23:37:30','2023-12-13 23:37:30'),(3,'coba','coba@app.com',NULL,'$2y$10$ht6zCrjrmfJ55/GrxQfZh.Z0FwGZRxKZQyIE9RBWx7c6kYLBncArS',NULL,'2024-01-03 02:17:36','2024-01-03 02:17:36');
+INSERT INTO `users` VALUES (1,'administrator','admin@app.com',NULL,'$2y$10$b5kuvUoBIzbyqDA0GybOUOCyTclX6zRnsntCz9HMs4gmnRheo/1Du',NULL,'2024-02-04 03:46:38','2024-02-04 03:46:38'),(2,'user','user@app.com',NULL,'$2y$10$TXOggE4wM5Ygcv6oifACGeEK3yMPv1UvJ2i5L7tQuCBI8decxSiju',NULL,'2024-02-04 03:46:38','2024-02-04 03:46:38');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -489,4 +493,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-03 17:18:02
+-- Dump completed on 2024-02-04 21:21:35

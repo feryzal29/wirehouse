@@ -24,7 +24,7 @@ class IndexController extends Controller
         $keluar = Transfer2::where('pengirim_id', $maping->plan_id)->count();
         $belum = Transfer2::where('penerima_id', $maping->plan_id)->where('status_pengiriman','belum')->count();
         $sudah = Transfer2::where('penerima_id', $maping->plan_id)->where('status_pengiriman','diterima')->count();
-        $pengganti = Transfer2::where('pengirim_id', $maping->plan_id)
+        $pengganti = Transfer2::where('penerima_id', $maping->plan_id)
                                 ->where('pengganti','=','yes')->count();
         return view('index',compact(['keluar','belum','sudah','pengganti']));
     }

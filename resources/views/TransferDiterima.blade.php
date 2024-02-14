@@ -56,10 +56,10 @@
             <label for="exampleInputEmail1">Material Document :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
           </div>
-          <div class="form-group">
+          {{-- <div class="form-group">
             <label for="exampleInputEmail1">Matdoc Pengganti :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->matdoc_pengganti }}" readonly>
-          </div>
+          </div> --}}
           
           <div class="form-group">
             <label for="exampleInputEmail1">Item :</label>
@@ -81,9 +81,11 @@
             <input type="text" class="form-control" name="status" value="{{ $transfer->status }}" readonly>
           </div>
 
+
+          @if ($transfer->status == "open")
           <div class="form-group">
             <label for="exampleInputEmail1">PR Pengganti :</label>
-            <input type="number" class="form-control" name="pr_pengganti" placeholder="Nama Penerima...">
+            <input type="number" class="form-control" name="pr_pengganti" placeholder="PR Pengganti...">
           </div>
 
           <label>ETA Meterial Pengganti :</label>
@@ -95,6 +97,10 @@
                   </div>
               </div>
           </div>
+          @else
+            
+          @endif
+         
             <!-- <label for="customFile">Custom File</label> -->
 
             {{-- <div class="custom-file">

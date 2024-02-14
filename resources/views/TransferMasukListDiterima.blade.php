@@ -67,7 +67,28 @@
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
                   <td>
-                    <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti Penerimaan</a></td>
+                    @if ($item->status == 'open')
+                      {{-- <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti </a>
+                      <a href="{{ route('transfer.show', $item->id) }}" class="btn btn-success">Ganti</a> --}}
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                          <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
+                          <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
+                        </div>
+                      </div>
+                      {{-- <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a>
+                        <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a>
+                        <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->id) }}" data-method="delete">Delete</a>
+                      </div> --}}
+                    </td>
+                    @else
+                      <a href="{{ route('bukti.penerimaan', $item->id) }}" class="btn btn-primary">Bukti Penerimaan</a></td>
+                    @endif
+                   
                   {{-- <a class="dropdown-item" href="{{ route('bukti.penerimaan', $item->id) }}">Bukti Penerimaan</a> --}}
                   {{-- <td> --}}
                     {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
