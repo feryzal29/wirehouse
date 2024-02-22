@@ -51,6 +51,7 @@ class TransferController extends Controller
                     'transfer2s.status_pengiriman',
                     'transfer2s.diterima_oleh',
                     'transfer2s.estimate_time_arrival',
+                    'transfer2s.lokasi_transit',
                     'material_update.material_description as material_update'
                 ])
                 ->where('transfer2s.pengirim_id', '=', $maping->plan_id)
@@ -84,6 +85,7 @@ class TransferController extends Controller
                 'transfer2s.item',
                 'users.name as pic',
                 'transfer2s.pengganti',
+                'transfer2s.matdoc_pengganti',
                 'transfer2s.status',
                 'transfer2s.status_pengiriman',
                 'transfer2s.diterima_oleh',
@@ -184,11 +186,13 @@ class TransferController extends Controller
                 'materials.mnemonic',
                 'materials.part_number',
                 'transfer2s.material_dokumen',
+                'transfer2s.matdoc_pengganti',
                 'transfer2s.item',
                 'users.name as pic',
                 'transfer2s.pengganti',
                 'transfer2s.status',
                 'transfer2s.status_pengiriman',
+                'transfer2s.lokasi_transit',
                 'transfer2s.diterima_oleh'
             ])
             ->where('transfer2s.penerima_id', '=', $maping->plan_id)
@@ -223,6 +227,8 @@ class TransferController extends Controller
                 'transfer2s.pengganti',
                 'transfer2s.status',
                 'transfer2s.status_pengiriman',
+                'transfer2s.matdoc_pengganti',
+                'transfer2s.lokasi_transit',
                 'transfer2s.diterima_oleh'
             ])
             ->where('transfer2s.penerima_id', '=', $maping->plan_id)
@@ -252,6 +258,7 @@ class TransferController extends Controller
                 'materials.mnemonic',
                 'materials.part_number',
                 'transfer2s.material_dokumen',
+                'transfer2s.matdoc_pengganti',
                 'transfer2s.item',
                 'users.name as pic',
                 'transfer2s.pengganti',
@@ -484,6 +491,7 @@ class TransferController extends Controller
                 'materials.mnemonic',
                 'materials.part_number',
                 'transfer2s.material_dokumen',
+                'transfer2s.matdoc_pengganti',
                 'transfer2s.item',
                 'users.name as pic',
                 'transfer2s.pengganti',
@@ -491,6 +499,7 @@ class TransferController extends Controller
                 'transfer2s.status_pengiriman',
                 'transfer2s.diterima_oleh',
                 'transfer2s.matdoc_pengganti',
+                'transfer2s.lokasi_transit',
                 'transfer2s.nama_pengirim',
             ])
             ->where('transfer2s.id', '=', $id)

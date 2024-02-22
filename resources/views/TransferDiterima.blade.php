@@ -56,6 +56,10 @@
             <label for="exampleInputEmail1">Material Document :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->material_dokumen }}" readonly>
           </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Matdoc Pengganti :</label>
+            <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->matdoc_pengganti }}" readonly>
+          </div>
           {{-- <div class="form-group">
             <label for="exampleInputEmail1">Matdoc Pengganti :</label>
             <input type="text" class="form-control" name="material_dokumen" value="{{ $transfer->matdoc_pengganti }}" readonly>
@@ -79,6 +83,10 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Status :</label>
             <input type="text" class="form-control" name="status" value="{{ $transfer->status }}" readonly>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Status :</label>
+            <input type="text" class="form-control" name="status" value="{{ $transfer->lokasi_transit }}" readonly>
           </div>
 
 

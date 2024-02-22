@@ -42,6 +42,7 @@
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
               <th>Material Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Estimate Time Arrival</th>
               <th>Action</th>
             </tr>
@@ -68,6 +69,7 @@
                   </td>
                   <td>{{ $item->diterima_oleh }}</td>
                   <td>{{ $item->material_update }}</td>
+                  <td>{{ $item->lokasi_transit }}</td>
                   <td>
                     @if ($item->estimate_time_arrival == null)
                      
@@ -132,6 +134,7 @@
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
               <th>Material Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Estimate Time Arrival</th>
               <th>Action</th>
             </tr>

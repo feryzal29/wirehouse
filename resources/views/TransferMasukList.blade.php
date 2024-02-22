@@ -35,9 +35,11 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
@@ -53,9 +55,11 @@
                   <td>{{ $item->mnemonic }}</td>
                   <td>{{ $item->part_number }}</td>
                   <td>{{ $item->material_dokumen }}</td>
+                  <td>{{ $item->matdoc_pengganti }}</td>
                   <td>{{ $item->item }}</td>
                   <td>{{ $item->pic }}</td>
                   <td>{{ $item->pengganti }}</td>
+                  <td>{{ $item->lokasi_transit }}</td>
                   <td>{{ $item->status }}</td>
                   <td>
                     @if ($item->status_pengiriman == 'belum')
@@ -69,6 +73,7 @@
                     
                     {{-- <a class="dropdown-item" href="{{ route('transfer.show', $item->id) }}">Ganti</a> --}}
                     <a href="{{ route('transfer.penerimaan',$item->id) }}" class="btn btn-success">Terima</a>
+                    
                     {{-- <a onclick="return confirm('Are you sure?')" href="{{ route('transfer.delete', $item->tf) }}" class="btn btn-danger" data-method="delete">Delete</a> --}}
                     {{-- <form action="{{ route('transfer.update', $item->id) }}" method="post">
                       @csrf
@@ -99,9 +104,11 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>

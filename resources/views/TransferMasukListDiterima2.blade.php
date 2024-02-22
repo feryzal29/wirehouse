@@ -35,11 +35,13 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
+              <th>Lokasi Transit</th>
               <th>Diterima oleh</th>
               <th>Bukti Penerima</th>
               {{-- <th>Action</th> --}}
@@ -54,6 +56,7 @@
                   <td>{{ $item->mnemonic }}</td>
                   <td>{{ $item->part_number }}</td>
                   <td>{{ $item->material_dokumen }}</td>
+                  <td>{{ $item->matdoc_pengganti }}</td>
                   <td>{{ $item->item }}</td>
                   <td>{{ $item->pic }}</td>
                   <td>{{ $item->pengganti }}</td>
@@ -65,6 +68,7 @@
                     <span class="badge badge-success">Sudah diterima</span>
                     @endif
                   </td>
+                  <td>{{ $item->matdoc_pengganti }}</td>
                   <td>{{ $item->diterima_oleh }}</td>
                   <td>
                     @if ($item->status == 'open')
@@ -121,11 +125,13 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
+              <th>Lokasi Transit</th>
               <th>Diterima oleh</th>
               <th>Bukti Penerima</th>
               {{-- <th>Action</th> --}}

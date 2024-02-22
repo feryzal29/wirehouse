@@ -35,6 +35,7 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
@@ -55,6 +56,7 @@
                   <td>{{ $item->mnemonic }}</td>
                   <td>{{ $item->part_number }}</td>
                   <td>{{ $item->material_dokumen }}</td>
+                  <td>{{ $item->matdoc_pengganti }}</td>
                   <td>{{ $item->item }}</td>
                   <td>{{ $item->pic }}</td>
                   <td>{{ $item->pengganti }}</td>
@@ -116,6 +118,7 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>

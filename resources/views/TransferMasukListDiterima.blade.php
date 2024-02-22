@@ -35,9 +35,11 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
@@ -54,9 +56,11 @@
                   <td>{{ $item->mnemonic }}</td>
                   <td>{{ $item->part_number }}</td>
                   <td>{{ $item->material_dokumen }}</td>
+                  <td>{{ $item->matdoc_pengganti }}</td>
                   <td>{{ $item->item }}</td>
                   <td>{{ $item->pic }}</td>
                   <td>{{ $item->pengganti }}</td>
+                  <td>{{ $item->lokasi_transit }}</td>
                   <td>{{ $item->status }}</td>
                   <td>
                     @if ($item->status_pengiriman == 'belum')
@@ -121,9 +125,11 @@
               <th>Mnemonic</th>
               <th>Part Number</th>
               <th>Material Document</th>
+              <th>Matdoc Pengganti</th>
               <th>Item</th>
               <th>PIC</th>
               <th>Pengganti</th>
+              <th>Lokasi Transit</th>
               <th>Status</th>
               <th>Status Pengiriman</th>
               <th>Diterima oleh</th>
